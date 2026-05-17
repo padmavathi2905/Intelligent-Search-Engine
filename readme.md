@@ -1,90 +1,73 @@
 # Adaptive Intelligent Recipe Search
 
-A modern search system that combines keyword-based search and semantic understanding to deliver more relevant and meaningful recipe results.
+A search system that combines keyword-based retrieval and semantic understanding to deliver more relevant and meaningful recipe results.
 
 --------------------------------------------------
 
 ## Overview
 
-Traditional search engines rely only on keyword matching, which often fails to capture user intent.  
-This project introduces an Adaptive Hybrid Search System that dynamically balances:
-
-- Keyword Search (BM25-like)
-- Semantic Search (Sentence Transformers)
-- Adaptive Ranking based on query type
+Traditional search engines rely on exact keyword matching, which often fails to capture user intent. This project introduces an Adaptive Hybrid Search System that dynamically balances keyword search and semantic search using a query-aware ranking strategy.
 
 --------------------------------------------------
 
 ## Key Features
 
-- Smart recipe search (keyword + semantic)
-- Adaptive ranking using query understanding
-- Explainable results (BM25 vs Semantic scores)
-- Full recipe details:
-  - Ingredients
-  - Steps (step-by-step)
-  - Cooking time
-  - Description
-- Modern UI with:
-  - Animated background
-  - Expandable sections
-  - Hover effects
-  - Loading spinner
+- Hybrid recipe search combining keyword and semantic methods  
+- Adaptive ranking based on query characteristics  
+- Explainable results with keyword and semantic scores  
+- Detailed recipe output including ingredients, steps, time, and description  
+- Interactive user interface with expandable sections and loading feedback  
 
 --------------------------------------------------
 
 ## System Architecture
 
 User Query  
-   ↓  
-Frontend (Streamlit UI)  
-   ↓  
-Backend API (FastAPI)  
-   ↓  
-Keyword Search + Semantic Search  
-   ↓  
+↓  
+Streamlit Frontend  
+↓  
+FastAPI Backend  
+↓  
+Keyword Search and Semantic Search  
+↓  
 Adaptive Fusion  
-   ↓  
+↓  
 Ranked Results  
 
 --------------------------------------------------
 
 ## Methodology
 
-1. Keyword Search  
-   - BM25-like scoring  
-   - Counts matching words  
+The system combines keyword-based and semantic retrieval using a hybrid scoring function:
 
-2. Semantic Search  
-   - SentenceTransformer (MiniLM)  
-   - Cosine similarity  
+Final Score = α × Keyword + (1 - α) × Semantic  
 
-3. Adaptive Ranking  
+Keyword Search uses a BM25-style approach that counts query term matches.  
+Semantic Search uses SentenceTransformer embeddings with cosine similarity.  
 
-Final Score = α * Keyword + (1 - α) * Semantic  
+Adaptive Ranking adjusts the value of α based on the query:
 
-Where:
-- Short queries ("egg") → α = 0.8  
-- Mixed queries → α = 0.5  
-- Natural language queries → α = 0.2  
+Short queries → α = 0.8  
+Mixed queries → α = 0.5  
+Natural language queries → α = 0.2  
 
 --------------------------------------------------
 
 ## Dataset
 
-- Source: Food.com Recipes Dataset (Kaggle)
+Source: Food.com Recipes Dataset from Kaggle  
 
 Fields used:
-- Name
-- Ingredients
-- Steps
-- Description
-- Cooking Time
+Name  
+Ingredients  
+Steps  
+Description  
+Cooking Time  
 
 Preprocessing:
-- Removed null values
-- Converted lists to strings
-- Combined text for search
+Removed missing values  
+Converted lists to strings  
+Combined fields into searchable text  
 
 --------------------------------------------------
 
@@ -93,80 +76,82 @@ Preprocessing:
 Frontend: Streamlit  
 Backend: FastAPI  
 Model: Sentence Transformers  
-Data: Pandas  
-ML: Scikit-learn  
+Data Processing: Pandas  
+Machine Learning: Scikit-learn  
 Language: Python  
 
 --------------------------------------------------
 
-## Installation & Setup
+## Installation and Setup
 
-1. Clone repository  
 git clone <your-repo-link>  
 cd adaptive-search  
 
-2. Create virtual environment  
 python3 -m venv venv  
 source venv/bin/activate  
 
-3. Install dependencies  
 pip install pandas fastapi uvicorn sentence-transformers scikit-learn numpy streamlit requests  
 
-4. Prepare dataset  
 python prepare_data.py  
 
-5. Run backend  
 uvicorn main:app --reload  
 
-6. Run frontend  
 streamlit run app.py  
 
-7. Open app  
+Open in browser:  
 http://localhost:8501  
 
 --------------------------------------------------
 
-## 🎥 Demo Usage
+## Demo Usage
 
-Try queries like:
-- egg
-- healthy breakfast
-- low calorie breakfast with eggs
+Example queries:
+egg  
+healthy breakfast  
+low calorie breakfast with eggs  
 
 Behavior:
-- Short query → keyword search dominates  
-- Long query → semantic search dominates  
-- Mixed query → hybrid search  
+Short query → Keyword dominant  
+Long query → Semantic dominant  
+Mixed query → Hybrid search  
 
 --------------------------------------------------
 
-## 🧪 Evaluation
+## Evaluation
 
-Compared:
-- Keyword-only search  
-- Semantic-only search  
-- Adaptive hybrid model  
+The system is evaluated by comparing keyword-only, semantic-only, and hybrid retrieval methods.
 
-Results:
-- Better relevance  
-- Handles natural language  
-- More meaningful results  
+Results show improved relevance, better handling of natural language queries, and balanced precision and recall using the hybrid approach.
 
 --------------------------------------------------
 
-## 💡 Future Enhancements
+## Future Enhancements
 
-- Add food images  
-- Add filters (time, ingredients)  
-- Favorites system  
-- Flutter app integration  
-- Learning-to-Rank  
-- Deployment  
+Add image support for recipes  
+Introduce filtering by time and ingredients  
+Implement personalization features  
+Improve ranking using learning-based methods  
+Deploy system for public access  
 
 --------------------------------------------------
 
-## 🏁 Conclusion
+## Conclusion
 
-This project shows how combining traditional search methods with modern AI improves search quality and user experience.
+This project demonstrates that combining traditional information retrieval techniques with modern semantic models improves search performance and user experience.
 
---------------------------------------------------# project-2-529_teamadaptive
+--------------------------------------------------
+
+## Authors
+
+Padmavathi Kadium  
+
+California State University, Long Beach  
+
+--------------------------------------------------
+
+## Note
+
+The original dataset is not included due to size limitations.  
+Download the dataset from Kaggle and run:
+
+python prepare_data.py
