@@ -154,4 +154,6 @@ California State University, Long Beach
 The original dataset is not included due to size limitations.  
 Download the dataset from Kaggle and run:
 
+Link for dataset - https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions
+
 python prepare_data.py
